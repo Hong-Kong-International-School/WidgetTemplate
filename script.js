@@ -24,6 +24,7 @@ const getCoordinatesFromIP = async () => {
             const scraperResponse = await fetch(`https://scraper.run/ip?addr=${ipAddress}`);
             if (scraperResponse.ok) {
                 const scraperData = await scraperResponse.json();
+                document.getElementById("location").innerHTML = scraperData.city + ", " + scraperData.country;
                 latitude = scraperData.latitude;
                 longitude = scraperData.longitude;
                 getLocalWeather(latitude, longitude);
@@ -50,10 +51,35 @@ const processWeatherData = (data) => {
     console.log('Current Temperature:', currentTemperature);
     console.log('Current Weather Code:', currentWeatherCode);
     console.log('Today Precipitation Probability:', todayPrecipitationProbability);
+    
+    document.getElementById("card").style.display = "block";
+    document.getElementById('current-temperature').innerHTML = String(currentTemperature) + "ºC";
+    getWeatherIcon(currentWeatherCode);
+    document.getElementById('chance-of-rain').innerHTML = String(todayPrecipitationProbability) + "%";
+    
 };
 
 
+const getWeatherIcon = (weatherCode) => {
+    const currentTime = new Date().getHours();
+    const isDayTime = currentTime >= 6 && currentTime < 18;
 
+    fetch('./icons.json')
+        .then(response => response.json())
+        .then(iconsData => {
+            const weatherIcon = iconsData[weatherCode]?.[isDayTime ? 'day' : 'night']?.image;
+            if (weatherIcon) {
+                console.log('Weather Icon:', weatherIcon);
+                document.getElementById('weather-icon').src = weatherIcon;
+            } else {
+                console.error('Weather Icon not found for weather code:', weatherCode);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+};
 
+// 
 window.addEventListener('DOMContentLoaded', getCoordinatesFromIP);
 

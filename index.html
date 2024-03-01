@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Weather Widget</title>
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <h1>Weather Widget</h1>
-    <p>Today's weather is: <span id="weather">Loading...</span></p>
+    <head>
+        <title>Weather Widget</title>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="card" id="card">
+            <h2 id="location">Location</h2>
+            <div class="grid">
+                <div class="weather-icon">
+                    <img id="weather-icon">
+                </div>
+                <div class="current-temperature">
+                    <p>Temperature</p>
+                    <h2 id="current-temperature"></h2>
+                </div>
+                <div class="chance-of-rain">
+                    <p>Chance of Rain</p>
+                    <h2 id="chance-of-rain"></h2>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+    
   </body>
 </html>
