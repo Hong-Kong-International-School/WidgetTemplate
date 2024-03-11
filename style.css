@@ -55,8 +55,7 @@ h1 {
 .weather-icon img {
     width: 100px;
     height: 100px;
-    filter: drop-shadow(4px 4px 0 black) 
-    drop-shadow(-1px -1px 0 black);
+    filter: drop-shadow(1px 1px 0 black) 
 }
 
 #location {
