@@ -75,12 +75,14 @@ const getWeatherIcon = (weatherCode) => {
 // Event listener to get coordinates from IP when the DOM is loaded
 window.addEventListener('DOMContentLoaded', getLocalWeather(22.28552, 114.15769));
 
+// Function to change the location and fetch weather data for the new location
 const changeLocation = () => {
     let location = document.getElementById('location').value;
     console.log(location)
     let newLatitude = 0;
     let newLongitude = 0;
 
+    // Check the selected location and assign corresponding latitude and longitude values
     if (location === 'hongkong') {
         newLatitude = 22.28552;
         newLongitude = 114.15769;
@@ -91,5 +93,8 @@ const changeLocation = () => {
         newLatitude = 40.7128;
         newLongitude = -74.0060;
     } 
+
+    // Call the getLocalWeather function with the new latitude and longitude
     getLocalWeather(newLatitude, newLongitude);
 }
+
