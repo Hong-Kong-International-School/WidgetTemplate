@@ -7,7 +7,11 @@
     </head>
     <body>
         <div class="card" id="card">
-            <h2 id="location">Location</h2>
+            <select onchange="changeLocation()" id="location">
+                <option value="hongkong">Hong Kong</option>
+                <option value="london">London</option>
+                <option value="newyork">New York City</option>
+            </select>
             <div class="grid">
                 <div class="weather-icon">
                     <img id="weather-icon">

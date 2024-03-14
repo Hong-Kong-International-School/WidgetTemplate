@@ -63,4 +63,8 @@ h1 {
     font-weight: 500;
     line-height: 0;
     width: 300px;
+    background-color: transparent;
+    outline: 2px solid white;    
+    padding: 4px;
+    border-radius: 10px;
 }

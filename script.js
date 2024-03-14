@@ -21,39 +21,6 @@ const getLocalWeather = async (latitude, longitude) => {
     }
 };
 
-// Function to get coordinates from IP address
-const getCoordinatesFromIP = async () => {
-    try {
-        // Fetch IP address
-        const response = await fetch('https://api.ipify.org?format=json');
-        if (response.ok) {
-            // If response is successful, parse the data and get the IP address
-            const data = await response.json();
-            const ipAddress = data.ip;
-            // Fetch location data using the IP address
-            const scraperResponse = await fetch(`https://scraper.run/ip?addr=${ipAddress}`);
-            if (scraperResponse.ok) {
-                // If response is successful, parse the data and update the location
-                const scraperData = await scraperResponse.json();
-                document.getElementById("location").innerHTML = scraperData.city + ", " + scraperData.country;
-                latitude = scraperData.latitude;
-                longitude = scraperData.longitude;
-                // Call the function to get local weather using the obtained coordinates
-                getLocalWeather(latitude, longitude);
-            } else {
-                // If response is not successful, log the error
-                console.error('Error:', scraperResponse.status);
-            }
-        } else {
-            // If response is not successful, log the error
-            console.error('Error:', response.status);
-        }
-    } catch (error) {
-        // If an error occurs during the fetch, log the error
-        console.error('Error:', error);
-    }
-};
-
 // Function to process weather data
 const processWeatherData = (data) => {
     // Extract necessary data from the response
@@ -106,4 +73,23 @@ const getWeatherIcon = (weatherCode) => {
 };
 
 // Event listener to get coordinates from IP when the DOM is loaded
-window.addEventListener('DOMContentLoaded', getCoordinatesFromIP);
+window.addEventListener('DOMContentLoaded', getLocalWeather(22.28552, 114.15769));
+
+const changeLocation = () => {
+    let location = document.getElementById('location').value;
+    console.log(location)
+    let newLatitude = 0;
+    let newLongitude = 0;
+
+    if (location === 'hongkong') {
+        newLatitude = 22.28552;
+        newLongitude = 114.15769;
+    } else if (location === 'london') {
+        newLatitude = 51.5074;
+        newLongitude = -0.1278;
+    } else if (location === 'newyork') {
+        newLatitude = 40.7128;
+        newLongitude = -74.0060;
+    } 
+    getLocalWeather(newLatitude, newLongitude);
+}
